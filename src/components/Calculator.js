@@ -14,12 +14,17 @@ export default class Calculator extends Component {
   }
 
   onKeyPress(keyValue) {
-    console.log("pressed:", keyValue)
 
     const current = this.state.value
     const finalValue = current === "0" ? keyValue : current + keyValue
 
     this.setState({value: finalValue})
+  }
+
+  calculate() {
+
+    const result = eval(this.state.value)
+    this.setState({value: result})
   }
 
   render() {
@@ -46,7 +51,7 @@ export default class Calculator extends Component {
           <div className="key-row">
             <Key value="0" onPress={ (k) => this.onKeyPress(k) } />
             <Key value="+" onPress={ (k) => this.onKeyPress(k) } />
-            <Key value="=" onPress={ (k) => this.onKeyPress(k) } />
+            <Key value="=" onPress={ (k) => this.calculate(k) } />
           </div>
         </div>
       </div>
